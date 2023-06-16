@@ -4,8 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Er inderx</title>
+    <style>
+        #map {
+          height: 400px;
+          width: 100%;
+        }
+      </style>
 </head>
 <body>
-    <h1>El h1 de la pagina</h1>
+    <h1>Obtener Ubicación del Usuario</h1>
+    <button id="getLocationBtn">Obtener Ubicación</button>
+    <div id="map"></div>
+  
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
+    <script>
+      var map;
+  
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 8
+        });
+      }
+  
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+          alert('Geolocalización no es soportada por este navegador.');
+        }
+      }
+  
+      function showPosition(position) {
+        var userLocation = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+  
+        map.setCenter(userLocation);
+        var marker = new google.maps.Marker({
+          position: userLocation,
+          map: map
+        });
+      }
+  
+      document.getElementById('getLocationBtn').addEventListener('click', getLocation);
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
 </body>
 </html>
+
+  <h1>Obtener Ubicación del Usuario</h1>
+  <button id="getLocationBtn">Obtener Ubicación</button>
+  <div id="map"></div>
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
+  <script>
+    var map;
+
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: -34.397, lng: 150.644},
+        zoom: 8
+      });
+    }
+
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+        alert('Geolocalización no es soportada por este navegador.');
+      }
+    }
+
+    function showPosition(position) {
+      var userLocation = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+
+      map.setCenter(userLocation);
+      var marker = new google.maps.Marker({
+        position: userLocation,
+        map: map
+      });
+    }
+
+    document.getElementById('getLocationBtn').addEventListener('click', getLocation);
+  </script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
